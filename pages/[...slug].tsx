@@ -12,7 +12,7 @@ const RESOURCE_TYPES = ["node--page", "node--article"]
 interface NodePageProps {
   resource: DrupalNode
 }
-
+//console.log("Ayo?: ", process.env.NEXT_PUBLIC_DRUPAL_BASE_URL);
 export default function NodePage({ resource }: NodePageProps) {
   if (!resource) return null
 
@@ -28,6 +28,7 @@ export default function NodePage({ resource }: NodePageProps) {
   )
 }
 
+// Get list of all available paths
 export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
   return {
     paths: await drupal.getStaticPathsFromContext(RESOURCE_TYPES, context),
@@ -35,6 +36,7 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
   }
 }
 
+// Fetch data
 export async function getStaticProps(
   context
 ): Promise<GetStaticPropsResult<NodePageProps>> {
@@ -53,8 +55,10 @@ export async function getStaticProps(
     params = {
       include: "field_image,uid",
     }
+    withAuth: true // Set the custom auth here.
   }
-
+  
+  // Fetch one resource
   const resource = await drupal.getResourceFromContext<DrupalNode>(
     path,
     context,

@@ -37,9 +37,11 @@ export default function IndexPage({ nodes }: IndexPageProps) {
   )
 }
 
+// Fetch data
 export async function getStaticProps(
   context
 ): Promise<GetStaticPropsResult<IndexPageProps>> {
+  // Fetch articles
   const nodes = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
     "node--article",
     context,
