@@ -37,7 +37,7 @@ export default function IndexPage({ nodes }: IndexPageProps) {
   );
 }
 
-// Fetch data
+// Fetch data from context
 export async function getStaticProps(
   context
 ): Promise<GetStaticPropsResult<IndexPageProps>> {
@@ -48,7 +48,8 @@ export async function getStaticProps(
     {
       params: {
         "filter[status]": 1,
-        "fields[node--article]": "title,path,field_image,uid,created",
+        "fields[node--article]":
+          "title,path,field_description,field_image,uid,created",
         include: "field_image,uid",
         sort: "-created",
       },

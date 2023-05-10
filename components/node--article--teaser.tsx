@@ -1,14 +1,15 @@
-import Image from "next/image"
-import Link from "next/link"
-import { DrupalNode } from "next-drupal"
+import Image from "next/image";
+import Link from "next/link";
+import { DrupalNode } from "next-drupal";
 
-import { absoluteUrl, formatDate } from "lib/utils"
+import { absoluteUrl, formatDate } from "lib/utils";
 
 interface NodeArticleTeaserProps {
-  node: DrupalNode
+  node: DrupalNode;
 }
 
 export function NodeArticleTeaser({ node, ...props }: NodeArticleTeaserProps) {
+  console.log("Node: ", node);
   return (
     <article {...props}>
       <Link href={node.path.alias} className="no-underline hover:text-blue-600">
@@ -23,6 +24,9 @@ export function NodeArticleTeaser({ node, ...props }: NodeArticleTeaserProps) {
         ) : null}
         <span> - {formatDate(node.created)}</span>
       </div>
+      {node.field_description && (
+        <p className="text-orange-400">{node.field_description}</p>
+      )}
       {node.field_image && (
         <figure className="my-4">
           <Image
@@ -51,5 +55,5 @@ export function NodeArticleTeaser({ node, ...props }: NodeArticleTeaserProps) {
         </svg>
       </Link>
     </article>
-  )
+  );
 }

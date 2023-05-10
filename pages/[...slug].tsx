@@ -15,7 +15,7 @@ interface NodePageProps {
 //console.log("Ayo?: ", process.env.NEXT_PUBLIC_DRUPAL_BASE_URL);
 export default function NodePage({ resource }: NodePageProps) {
   if (!resource) return null;
-  console.log("what is Resource?: ", resource);
+  //console.log("what is Resource?: ", resource);
 
   return (
     <Layout>
@@ -37,18 +37,19 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
   };
 }
 
-// Fetch data
+// Fetch data for prerendering
 export async function getStaticProps(
   context
 ): Promise<GetStaticPropsResult<NodePageProps>> {
+  // translatePathFromContext - returns resource type based on slug value in context.
   const path = await drupal.translatePathFromContext(context);
-  console.log("what is Context?: ", context);
   if (!path) {
     return {
       notFound: true,
     };
   }
 
+  // Check for type
   const type = path.jsonapi.resourceName;
 
   let params = {};
