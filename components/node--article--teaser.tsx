@@ -24,9 +24,7 @@ export function NodeArticleTeaser({ node, ...props }: NodeArticleTeaserProps) {
         ) : null}
         <span> - {formatDate(node.created)}</span>
       </div>
-      {node.field_description && (
-        <p className="text-orange-400">{node.field_description}</p>
-      )}
+      {node.field_description && <p>{node.field_description}</p>}
       {node.field_image && (
         <figure className="my-4">
           <Image
