@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Most styles from Tailwindcss, include CSS only on expections */
+body {
+  background-color: #1d1d1d;
+}
