@@ -67,6 +67,9 @@ export async function getStaticProps(
     "bb067f12-4099-4d79-9c93-706dcc5c83c5"
   );
 
+  // Fetch main menu
+  const mainMenu = await drupal.getMenu("main");
+
   return {
     props: {
       nodes,
